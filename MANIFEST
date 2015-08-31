@@ -1,0 +1,12 @@
+lib/Test/DBIC/SQLite.pm
+MANIFEST			This list of files
+MANIFEST.SKIP
+README
+t/10-connect_ok.t
+t/lib/DummyNocompile.pm
+t/lib/DummyNoconnect.pm
+t/lib/DummySchema.pm
+xt/00-compile.t
+xt/10-manifest.t
+xt/20-pod.t
+xt/30-pod-coverage.t
