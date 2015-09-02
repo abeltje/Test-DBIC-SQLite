@@ -1,7 +1,9 @@
-lib/Test/DBIC/SQLite.pm
+Changes
 MANIFEST			This list of files
 MANIFEST.SKIP
+Makefile.PL
 README
+lib/Test/DBIC/SQLite.pm
 t/10-connect_ok.t
 t/lib/DummyNocompile.pm
 t/lib/DummyNoconnect.pm
