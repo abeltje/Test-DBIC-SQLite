@@ -1,0 +1,25 @@
+Changes on 2015-09-02 for repository at:
+
+
+Enjoy!
+
+________________________________________________________________________________
+[677bf20] by abeltje on Mon, 31 Aug 2015 17:57:47 +0200
+
+     Initial commit.
+
+
+A	.gitignore
+A	MANIFEST
+A	MANIFEST.SKIP
+A	Makefile.PL
+A	README
+A	lib/Test/DBIC/SQLite.pm
+A	t/10-connect_ok.t
+A	t/lib/DummyNocompile.pm
+A	t/lib/DummyNoconnect.pm
+A	t/lib/DummySchema.pm
+A	xt/00-compile.t
+A	xt/10-manifest.t
+A	xt/20-pod.t
+A	xt/30-pod-coverage.t
