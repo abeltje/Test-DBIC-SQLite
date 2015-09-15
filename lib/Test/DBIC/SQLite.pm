@@ -124,8 +124,15 @@ sub connect_dbic_sqlite_ok {
 
 1;
 
-=head1 LICENCE
+=head1 LICENSE
 
 (c) MMXV - Abe Timmerman <abeltje@cpan.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut

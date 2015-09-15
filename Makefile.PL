@@ -8,6 +8,7 @@ WriteMakefile(
     NAME          => 'Test::DBIC::SQLite',
     VERSION_FROM  => 'lib/Test/DBIC/SQLite.pm',
     ABSTRACT_FROM => 'lib/Test/DBIC/SQLite.pm',
+    AUTHOR        => 'Abe Timmerman <abeltje@cpan.org>',
 
     PREREQ_PM => {
         'Test::Simple' => 0,
@@ -18,6 +19,7 @@ WriteMakefile(
         'Test::Tester' => 0,
     },
 
+    MIN_PERL_VERSION => '5.010001',
     LICENSE  => 'perl_5',
     META_ADD => {
         'meta-spec' => {version => 2},
@@ -25,7 +27,7 @@ WriteMakefile(
             homepage   => '',
             repository => {
                 type => 'git',
-                url  => 'http://source.test-smoke.org/git/',
+                url  => 'https://github.com/abeltje/Test-DBIC-SQLite.git',
             },
         },
         'x_IRC' => 'irc://irc.perl.org/#amsterdam.pm',
