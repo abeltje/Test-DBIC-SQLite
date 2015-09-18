@@ -1,8 +1,28 @@
-Changes on 2015-09-09 for repository at:
-
+Changes on 2015-09-18 for repository at:
+  Fetch URL: git@github.com:abeltje/Test-DBIC-SQLite.git
+  Push  URL: git@github.com:abeltje/Test-DBIC-SQLite.git
 
 Enjoy!
 
+________________________________________________________________________________
+[b1a3494] by abeltje on Tue, 15 Sep 2015 06:26:48 +0200
+
+     Improve kwalitee-score
+
+        * Add MIN_PERL_VERSION and AUTHOR to WriteMakefile(()
+        * Add LICENSE section to the documentation
+
+
+M	Makefile.PL
+M	lib/Test/DBIC/SQLite.pm
+________________________________________________________________________________
+[a9bf17e] by abeltje on Wed, 9 Sep 2015 16:24:56 +0200
+
+     Autocommit for distribution Test::DBIC::SQLite 0.00_02 (same)
+
+
+M	Changes
+M	lib/Test/DBIC/SQLite.pm
 ________________________________________________________________________________
 [897b426] by abeltje on Wed, 2 Sep 2015 15:14:26 +0200
 

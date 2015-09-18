@@ -4,7 +4,7 @@ use utf8;
 use warnings;
 use strict;
 
-our $VERSION = '0.00_02';
+our $VERSION = '0.01';
 
 use parent 'Test::Builder::Module';
 
