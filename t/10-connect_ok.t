@@ -1,11 +1,7 @@
-#! perl -w
+#! perl -I. -w
 use utf8;
-use strict;
-
-use lib 't/lib';
-
 use Test::Tester;
-use Test::More;
+use t::Test::abeltje;
 
 use Test::DBIC::SQLite;
 
@@ -126,5 +122,4 @@ use Test::DBIC::SQLite;
         "connect_dbic_sqlite_ok()"
      );
 }
-done_testing();
-
+abeltje_done_testing();

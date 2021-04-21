@@ -16,7 +16,11 @@ WriteMakefile(
         'DBD::SQLite'  => 0,
     },
     BUILD_REQUIRES => {
-        'Test::Tester' => 0,
+        'Test::Warnings'      => 0,
+        'Test::Fatal'         => 0,
+        'Test::Pod'           => 0,
+        'Test::Pod::Coverage' => 0,
+        'Test::Tester'        => 0,
     },
 
     MIN_PERL_VERSION => '5.010001',

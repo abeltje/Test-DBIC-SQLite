@@ -5,10 +5,11 @@ Makefile.PL
 README
 lib/Test/DBIC/SQLite.pm
 t/10-connect_ok.t
+t/Test/abeltje.pm
 t/lib/DummyNocompile.pm
 t/lib/DummyNoconnect.pm
 t/lib/DummySchema.pm
-xt/00-compile.t
-xt/10-manifest.t
-xt/20-pod.t
-xt/30-pod-coverage.t
+xt/00-manifest.t
+xt/01-compile.t
+xt/02-pod_syntax.t
+xt/03-pod-coverage.t

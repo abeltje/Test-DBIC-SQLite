@@ -4,5 +4,5 @@ tags
 pm_to_blib
 blib/
 cover_db/
-Makefile
+Makefile$
 MYMETA\.
