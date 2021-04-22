@@ -12,11 +12,12 @@ use Test::DBIC::SQLite;
         },
         {
             ok   => 1,
-            name => ':memory: ISA DummySchema',
+            name => 'the schema ISA DummySchema',
         },
         "connect_dbic_sqlite_ok()"
     );
 }
+
 {
     my $dbname = $0;
     my $schema;
@@ -28,7 +29,7 @@ use Test::DBIC::SQLite;
         },
         {
             ok => 1,
-            name => "$dbname ISA DummySchema",
+            name => "the schema ISA DummySchema",
         },
         "connect_dbic_sqlite_ok($dbname)"
     );
@@ -45,7 +46,7 @@ use Test::DBIC::SQLite;
         },
         {
             ok => 1,
-            name => "$dbname ISA DummySchema",
+            name => "the schema ISA DummySchema",
         },
         "connect_dbic_sqlite_ok($dbname)"
     );
@@ -61,8 +62,7 @@ use Test::DBIC::SQLite;
     like(
         $premature,
         qr{Error\ loading\ 'DummyNocompile':
-          \ «DummyNocompile.pm\ did\ not\ return\ a\ true\ value
-          \ at\ \(eval\ \d+\)\ line\ \d+.\n»\n}x,
+          \ DummyNocompile.pm\ did\ not\ return\ a\ true\ value}x,
         "require DummyNoCompile; fails"
     );
 }
@@ -73,9 +73,9 @@ use Test::DBIC::SQLite;
             my $schema = connect_dbic_sqlite_ok('DummyNoconnect');
         }
     );
-    is(
+    like(
         $premature,
-        "Error connecting DummyNoconnect to :memory:: «No connect\n»\n",
+        qr{Error connecting 'DummyNoconnect' to 'dbi:SQLite:dbname=:memory:'},
         "DummyNoconnect->connect(); fails"
     );
 }
@@ -90,7 +90,7 @@ use Test::DBIC::SQLite;
     );
     like(
         $premature,
-        qr{Error deploying DummySchema to :memory:: «no deploy at $0 line \d+.\n»\n},
+        qr{Error deploying 'DummySchema' to 'dbi:SQLite:dbname=:memory:': no deploy},
         "DummySchema->deploy(); fails"
     );
 }
@@ -104,7 +104,7 @@ use Test::DBIC::SQLite;
     );
     like(
         $premature,
-        qr{Error in callback: «error in callback at $0 line \d+.\n»\n},
+        qr{Error in post-connect-hook: error in callback at $0},
         "calling callback fails"
     );
 }
@@ -117,9 +117,10 @@ use Test::DBIC::SQLite;
         },
         {
             ok   => 1,
-            name => ':memory: ISA DummySchema',
+            name => 'the schema ISA DummySchema',
         },
         "connect_dbic_sqlite_ok()"
      );
 }
-abeltje_done_testing();
+
+done_testing();

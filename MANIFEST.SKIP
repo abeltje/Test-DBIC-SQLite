@@ -6,3 +6,4 @@ blib/
 cover_db/
 Makefile$
 MYMETA\.
+support/
