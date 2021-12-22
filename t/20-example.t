@@ -3,25 +3,27 @@ use utf8;
 use Test::Tester;
 use t::Test::abeltje;
 
+use File::Temp qw( tempfile );
 use Test::DBIC::SQLite;
 
 {
-    my $schema;
+    my ($schema, $td);
     # This is the only Test::Tester thing we do for an actual database
     # the rest of the tests is there to check that the hooks worked
     check_test(
         sub {
-            $schema = Test::DBIC::SQLite->connect_dbic_ok(
+            $td = Test::DBIC::SQLite->new(
                 schema_class      => 'Music::Schema',
                 pre_deploy_hook   => \&pre_deploy_hook,
                 post_connect_hook => \&populate_db,
             );
+            $schema = $td->connect_dbic_ok();
         },
         {
             ok   => 1,
             name => "the schema ISA Music::Schema",
         },
-        "Test::DBIC::SQLite->connect_dbic_ok()"
+        "\$td = Test::DBIC::SQLite->new(); \$td->connect_dbic_ok()"
     );
 
     my $broadway = $schema->resultset('Album')->search(
@@ -49,6 +51,63 @@ use Test::DBIC::SQLite;
         'frank zappA',
         "SELECT uc_last(name) AS ul_name FROM ...; works!"
     );
+
+    check_test(
+        sub { $td->drop_dbic_ok(); },
+        {
+            ok => 1,
+            name => ':memory: DROPPED',
+        },
+        "\$td->drop_dbic_ok()"
+    );
+}
+
+{
+    my ($fh, $filename) = tempfile();
+    my ($schema, $td);
+    check_test(
+        sub {
+            close($fh); unlink($filename); # risquee
+            $td = Test::DBIC::SQLite->new(
+                schema_class      => 'Music::Schema',
+                dbi_connect_info  => $filename,
+                post_connect_hook => \&populate_db,
+            );
+            $schema = $td->connect_dbic_ok();
+        },
+        {
+            ok => 1,
+        },
+        "Create SQLite in a file"
+    );
+    my $broadway = $schema->resultset('Album')->search(
+        { name => 'Broadway the Hard Way' }
+    )->first;
+    isa_ok($broadway, 'Music::Schema::Result::Album');
+
+    check_test(
+        sub { $td->drop_dbic_ok(); },
+        {
+            ok => 1,
+            name => "$filename DROPPED",
+        },
+        "\$td->drop_dbic_ok()"
+    );
+    ok(! -e $filename, "File gone...");
+
+    # trigger an error
+    my ($premature) = run_tests(
+        sub { $td->drop_dbic_ok(); },
+        {
+            ok => 1,
+            name => "$filename DROPPED",
+        }
+    );
+    like(
+        $premature,
+        qr{^Could not unlink.+?: $!},
+        "Cannot drop non existing database"
+    )
 }
 
 abeltje_done_testing();

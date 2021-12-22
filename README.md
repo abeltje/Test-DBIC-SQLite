@@ -4,18 +4,6 @@
 
 # SYNOPSIS
 
-The backward compatible way (*without* support for **`pre_deploy_hook`**):
-
-```perl
-#! perl -w
-use Test::More;
-use Test::DBIC::SQLite;
-
-my $schema = connect_dbic_sqlite_ok('My::Schema');
-
-done_tesing();
-```
-
 The preferred way (*with* support for **`pre_deploy_hook`**):
 
 ```perl
@@ -23,10 +11,11 @@ The preferred way (*with* support for **`pre_deploy_hook`**):
 use Test::More;
 use Test::DBIC::SQLite;
 
-my $schema = Test::DBIC::SQLite->connect_dbic_ok(
+my $t = Test::DBIC::SQLite->new(
     schema_class    => 'My::Schema',
     pre_deploy_hook => \&define_functions,
 );
+my $schema = $t->connect_dbic_ok();
 
 my $thing = $schema->resultset('MyTable')->search(
     { name    => 'Anything' },
@@ -38,6 +27,7 @@ is(
    "SELECT uc_last(name) AS ul_name FROM ...; works!"
 );
 
+$t->drop_dbic_ok();
 done_testing();
 
 # select uc_last('Stupid'); -- stupiD
@@ -53,6 +43,18 @@ sub define_functions {
 }
 ```
 
+The backward compatible way (*without* support for **`pre_deploy_hook`**):
+
+```perl
+#! perl -w
+use Test::More;
+use Test::DBIC::SQLite;
+
+my $schema = connect_dbic_sqlite_ok('My::Schema');
+
+done_tesing();
+```
+
 
 # DESCRIPTION
 
@@ -63,34 +65,7 @@ This is a re-implementation of `Test::DBIC::SQLite` `v0.01` using the
 It will `import()` [`warnings`](https://metacpan.org/pod/warnings) and
 [`strict`](https://metacpan.org/pod/strict) for you.
 
-## **`connect_dbic_sqlite_ok()`**
-
-This function is provided for backward compatibility and internally uses
-`Test::DBIC::SQLite->connect_dbic_ok()`.
-
-**NB**: As this function is backward compatible, it does *not* support the
-`$pre_deploy_hook` callback!
-
-### Parameters
-
-Positional:
-
-1. **`$dbic_schema_class`** (*Required*)  
-The class name of the
-[DBIx::Class::Schema](https://metacpan.org/pod/DBIx::Class::Schema) to use for
-the database connection.
-
-2. **`$sqlite_dbname`** (*Optional*, `:memory:`)  
-The default is **`:memory:`** which will create a temporary in-memory database.
-One can also pass a file name for a database on disk. See
-[MyDBD\_connection\_parameters](#mydbd_connection_parameters).
-
-3. **`$post_connect_hook`** (*Optional*)  
-This is an optional `CodeRef` that will be executed right after deploy (if any)
-and just before returning the schema instance. Useful for populating the
-database.
-
-## **`Test::DBIC::SQLite->connect_dbic_ok()`**
+## **`Test::DBIC::SQLite->new()`**
 
 This is the new implementation that supports the `$pre_deploy_hook`.
 
@@ -122,6 +97,34 @@ This is an optional `CodeRef` that will be executed right after deploy (if any)
 and just before returning the schema instance. Useful for populating the
 database.
 
+### Returns
+
+This method returns an instance of `Test::DBIC::SQLite`.
+
+## **`Test::DBIC::SQLite->connect_dbic_ok()`**
+
+This method can be called as a *class*method or as an *instance*method.
+
+### The instancemethod
+
+#### Parameters
+
+None.
+
+#### Returns
+
+An instance of the `DBIx::Class::Schema` one is trying to test.
+
+### The classmethod
+
+#### Parameters
+
+See the [new](#test-dbic-sqlite-new-) method.
+
+#### Returns
+
+An instance of the `DBIx::Class::Schema` one is trying to test.
+
 ## Implementation of `MyDBD_connection_parameters`
 
 The value of the `dbi_connect_info` parameter to the `connect_dbic_ok()`
@@ -132,7 +135,7 @@ accessed with `SQLite3`. By default we use the "special" value of
 
 This method returns a list of parameters to be passed to
 `DBIx::Class::Schema->connect()`. Keep in mind that the last argument
-(options-hash) will always be augmented with key-value pair: `skip_version => 1`.
+(options-hash) will always be augmented with key-value pair: `ignore_version => 1`.
 
 ### Note
 
@@ -144,6 +147,33 @@ At this moment we do not support the `uri=file:$db_file_name?mode=rwc` style of
 
 For in-memory databases this will always return **true**. For databases on disk
 this will return **true** if the file does not exist and **false** if it does.
+
+## **`connect_dbic_sqlite_ok()`**
+
+This function is provided for backward compatibility and internally uses
+`Test::DBIC::SQLite->connect_dbic_ok()`.
+
+**NB**: As this function is backward compatible, it does *not* support the
+`$pre_deploy_hook` callback!
+
+### Parameters
+
+Positional:
+
+1. **`$dbic_schema_class`** (*Required*)  
+The class name of the
+[DBIx::Class::Schema](https://metacpan.org/pod/DBIx::Class::Schema) to use for
+the database connection.
+
+2. **`$sqlite_dbname`** (*Optional*, `:memory:`)  
+The default is **`:memory:`** which will create a temporary in-memory database.
+One can also pass a file name for a database on disk. See
+[MyDBD\_connection\_parameters](#mydbd_connection_parameters).
+
+3. **`$post_connect_hook`** (*Optional*)  
+This is an optional `CodeRef` that will be executed right after deploy (if any)
+and just before returning the schema instance. Useful for populating the
+database.
 
 ---
 
@@ -190,8 +220,10 @@ This could be used as:
     use Test::More;
     use Test::DBIC::SQLite;
 
-    my $schema = Test::DBIC::SQLite->connect_dbic_ok(schema_class => 'My::Schema');
+    my $t = Test::DBIC::SQLite->new(schema_class => 'My::Schema');
+    my $schema = $t->connect_dbic_ok();
 
+    $t->drop_dbic_ok();
     done_testing();
 ```
 
@@ -201,10 +233,7 @@ This `Moo::Role` is for Tester-modules that implement the connection-test
 function for the combination of any `DBIx::Class::Schema` and a specific
 database-engine (`DBD::yourDBD`).
 
-## connect\_dbic\_ok(@parameters)
-
-This is the base connection test for all `Test::DBIC::<yourDBD>`
-implementations and probably shouldn't be overridden.
+## `Test::DBIC::<yourDBD>->new(@parameters)`
 
 The connection test does these steps:
 
@@ -249,6 +278,29 @@ A CodeRef to execute *after* `$schema->deploy` (if at all) is called.
 This CodeRef might be provided by the user who is writing the tests and is called
 with an instantiated `$your_schema_class` object as argument.
 
+## The `connect_dbic_ok` method
+
+This is the base connection test for all `Test::DBIC::<yourDBD>`
+implementations and probably shouldn't be overridden.
+
+The method can serve as a *instance* method as well as a *class* method.
+
+### Retruns
+
+In both cases it returns an instantiated `DBIx::Class::Schema` object one wants to test.
+
+## `$instance->connect_dbic_ok`
+
+### Parameters
+
+None.
+
+## `Test::DBIC::<yourDBD>->connect_dbic_ok`
+
+### Parameters
+
+As a *class* method it takes the same parameters as the [new method](#new-parameters-).
+
 ## **Required**: `MyDBD_connection_parameters($your_dbd_connect_info)`
 
 Your class will have to implement this method in a way that is appropriate for *yourDBD*.
@@ -283,7 +335,7 @@ This method should return an ArrayRef with the 4 elements supported by `DBI->con
 ### Note
 
 This `Moo::Role` augments this method (via `around`) in order to always make sure that
-the `options` HashRef gets the key-pair `skip_version => 1`, one can examine
+the `options` HashRef gets the key-pair `ignore_version => 1`, one can examine
 this option from within the `DBIx::Class::Schema->connect()` method to ignore a
 check for software and database versions.
 

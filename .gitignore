@@ -1,3 +1,9 @@
 .*.swp
 tags
 cover_db/
+Makefile.bak
+Makefile
+blib/
+pm_to_blib
+MYMETA.*
+META.*

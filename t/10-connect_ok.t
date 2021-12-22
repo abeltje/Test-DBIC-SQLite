@@ -16,6 +16,14 @@ use Test::DBIC::SQLite;
         },
         "connect_dbic_sqlite_ok()"
     );
+    check_test(
+        sub { drop_dbic_sqlite_ok(); },
+        {
+            ok => 1,
+            name => ':memory: DROPPED',
+        },
+        "drop_dbic_sqlite_ok()"
+    );
 }
 
 {
@@ -123,4 +131,22 @@ use Test::DBIC::SQLite;
      );
 }
 
-done_testing();
+{
+    my ($premature, @results) = run_tests(
+        sub {
+            local $Test::Builder::Level = $Test::Builder::Level + 1;
+            my $t = Test::DBIC::SQLite->new(
+                schema_class => 'DummySchema',
+                pre_deploy_hook => sub { die "In-PreDeployHook\n" },
+            );
+            my $schema = $t->connect_dbic_ok();
+        },
+    );
+    like(
+        $premature,
+        qr{^Error in pre-deploy-hook: In-PreDeployHook},
+        "Premature test fail in pre-deploy-hook"
+    );
+}
+
+abeltje_done_testing();
