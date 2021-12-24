@@ -4,16 +4,22 @@ Changes on 2021-12-24 for repository at:
 
 Enjoy!
 
-0.99_02 2021-12-24T16:40:52+01:00 (a3a8418 => Abe Timmerman)
- - (Abe Timmerman, 1 second ago) Autocommit for distribution
+0.99_03 2021-12-24T20:54:31+01:00 (937242d => Abe Timmerman)
+ - (Abe Timmerman, 2 seconds ago) Autocommit for distribution
+   Test::DBIC::SQLite 0.99_03 (test)
+
+0.99_02 2021-12-24T16:40:52+01:00 (b8ee75b => Abe Timmerman)
+ - (Abe Timmerman, 4 hours ago) Autocommit for distribution
    Test::DBIC::SQLite 0.99_02 (test)
+
+ - (Abe Timmerman, 66 seconds ago) Fix another test for dropping
 
 0.99_01 2021-12-22T17:50:49+01:00 (17973c6 => Abe Timmerman)
  - (Abe Timmerman, 2 days ago) Autocommit for distribution
    Test::DBIC::SQLite 0.99_01 (test)
 
- - (abeltje, 14 minutes ago) Disconnect from the storage before dropping
-   the database
+ - (abeltje, 4 hours ago) Disconnect from the storage before dropping the
+   database
  -     Also add a warning to the POD.
 
 0.01 2015-09-18T12:55:59+02:00 (623efc2 => abeltje)
