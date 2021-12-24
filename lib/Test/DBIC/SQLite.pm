@@ -211,6 +211,8 @@ An initialised instance of C<$schema_class>.
 This method implements C<< rm $dbname >>, in order not to letter your test
 directory with left over test databases.
 
+B<NOTE>: Make sure you called C<< $schema->storage->disconnect() >> first.
+
 =head2 C<connect_dbic_sqlite_ok(@parameters)>
 
 Create a SQLite3 database and deploy a dbic_schema. This function is provided

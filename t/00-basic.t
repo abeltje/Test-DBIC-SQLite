@@ -56,7 +56,7 @@ use File::Spec::Functions qw/ catfile /;
 
 {
     my $dir = tempdir(CLEANUP => 1);
-    my $dbfile = catfile($dir, "tds-testdb.sqlite3");
+    my $dbfile = catfile($dir, "tds-testdb-$$.sqlite3");
     note("Check dbfile is removed on 'drop_dbic_ok($dbfile)'");
 
     my $tbs = Test::DBIC::SQLite->new(
@@ -67,13 +67,15 @@ use File::Spec::Functions qw/ catfile /;
     my $schema = $tbs->connect_dbic_ok();
     ok(-e $dbfile, "The test database was created as a file");
 
+    $schema->storage->disconnect();
+    ok(! $schema->storage->connected(), "Disconnected from storage");
     $tbs->drop_dbic_ok();
     ok(! -e $dbfile, "The test database was removed as a file");
 }
 
 {
     my $dir = tempdir(CLEANUP => 1);
-    my $dbfile = catfile($dir, "tds-testdb.sqlite3");
+    my $dbfile = catfile($dir, "tds-testdb-$$.sqlite3");
     note("Check dbfile is removed on backward-compatible function 'drop_dbic_sqlite_ok($dbfile)'");
 
     my $schema = connect_dbic_sqlite_ok(
@@ -84,6 +86,8 @@ use File::Spec::Functions qw/ catfile /;
 
     ok(-e $dbfile, "The test database was created as a file");
 
+    $schema->storage->disconnect();
+    ok(! $schema->storage->connected(), "Disconnected from storage");
     drop_dbic_sqlite_ok();
     ok(! -e $dbfile, "The test database was removed as a file");
 }
