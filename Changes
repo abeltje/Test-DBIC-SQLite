@@ -1,12 +1,20 @@
-Changes on 2021-12-22 for repository at:
+Changes on 2021-12-24 for repository at:
   Fetch URL: ssh://git@source.test-smoke.org:9999/~/Test-DBIC-SQLite
   Push  URL: ssh://git@source.test-smoke.org:9999/~/Test-DBIC-SQLite
 
 Enjoy!
 
-0.99_01 2021-12-22T17:50:49+01:00 (b6602b0 => Abe Timmerman)
- - (Abe Timmerman, 2 seconds ago) Autocommit for distribution
+0.99_02 2021-12-24T16:40:52+01:00 (a3a8418 => Abe Timmerman)
+ - (Abe Timmerman, 1 second ago) Autocommit for distribution
+   Test::DBIC::SQLite 0.99_02 (test)
+
+0.99_01 2021-12-22T17:50:49+01:00 (17973c6 => Abe Timmerman)
+ - (Abe Timmerman, 2 days ago) Autocommit for distribution
    Test::DBIC::SQLite 0.99_01 (test)
+
+ - (abeltje, 14 minutes ago) Disconnect from the storage before dropping
+   the database
+ -     Also add a warning to the POD.
 
 0.01 2015-09-18T12:55:59+02:00 (623efc2 => abeltje)
  - (abeltje, 6 years ago) Autocommit for distribution Test::DBIC::SQLite
@@ -21,12 +29,10 @@ Enjoy!
  -     I introduced a Moo::Role that should be able to serve as a base for
  -     implementing other Database drivers.
 
- - (Abe Timmerman, 16 minutes ago) Mostly cleaning up of docs, code and
-   repo
+ - (Abe Timmerman, 2 days ago) Mostly cleaning up of docs, code and repo
  -     Added an examle of version-check to test Schema.
 
- - (Abe Timmerman, 4 minutes ago) Update t-Test-abeltje (with Kwalitee
-   check)
+ - (Abe Timmerman, 2 days ago) Update t-Test-abeltje (with Kwalitee check)
 
 0.00_02 2015-09-09T16:24:56+02:00 (a9bf17e => abeltje)
  - (abeltje, 6 years ago) Autocommit for distribution Test::DBIC::SQLite

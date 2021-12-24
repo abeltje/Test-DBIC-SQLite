@@ -2,7 +2,7 @@ package Test::DBIC::SQLite;
 use Moo;
 with 'Test::DBIC::DBDConnector';
 
-our $VERSION = "0.99_01";
+our $VERSION = "0.99_02";
 
 use parent 'Test::Builder::Module';
 our @EXPORT = qw( connect_dbic_sqlite_ok drop_dbic_sqlite_ok );
