@@ -30,7 +30,6 @@ has post_connect_hook => (
     required => 0
 );
 
-#use parent 'Test::Builder::Module';
 use Test::Builder::Module;
 
 sub builder { return Test::Builder::Module->builder }

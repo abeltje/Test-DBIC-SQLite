@@ -85,6 +85,8 @@ use Test::DBIC::SQLite;
     )->first;
     isa_ok($broadway, 'Music::Schema::Result::Album');
 
+    $schema->storage->disconnect();
+    ok(! $schema->storage->connected(), "Disconnected from storage");
     check_test(
         sub { $td->drop_dbic_ok(); },
         {
