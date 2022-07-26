@@ -1,12 +1,20 @@
-Changes on 2022-07-25 for repository at:
-  Fetch URL: ssh://git@source.test-smoke.org:9999/~/Test-DBIC-SQLite
-  Push  URL: ssh://git@source.test-smoke.org:9999/~/Test-DBIC-SQLite
+Changes on 2022-07-26 for repository at:
+  Fetch URL: git@github.com:abeltje/Test-DBIC-SQLite
+  Push  URL: git@github.com:abeltje/Test-DBIC-SQLite
 
 Enjoy!
 
-1.00_01 2022-07-25T20:56:21+02:00 (b6994db => Abe Timmerman)
+1.00_02 2022-07-26T11:02:36+02:00 (3dcc51a => Abe Timmerman)
+ - (Abe Timmerman, Tue, 26 Jul 2022 11:02:36 +0200) Autocommit for
+   distribution Test::DBIC::SQLite 1.00_02 (test)
+
+1.00_01 2022-07-25T20:56:21+02:00 (2b59b74 => Abe Timmerman)
  - (Abe Timmerman, Mon, 25 Jul 2022 20:56:21 +0200) Autocommit for
    distribution Test::DBIC::SQLite 1.00_01 (test)
+
+ - (Abe Timmerman, Tue, 26 Jul 2022 11:00:09 +0200) Disconnect from the
+   storage before removal
+ -     MSWin32 doesn't allow the removal of open files.
 
 1.00 2022-01-06T10:00:10+01:00 (5b29e50 => Abe Timmerman)
  - (Abe Timmerman, Thu, 6 Jan 2022 10:00:10 +0100) Autocommit for
