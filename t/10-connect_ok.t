@@ -163,6 +163,7 @@ use Test::DBIC::SQLite;
                 post_connect_hook => \&populate_db,
             );
             my $schema = $t->connect_dbic_ok();
+            $schema->storage->disconnect();
         },
         {
             ok => 1,
@@ -185,6 +186,7 @@ use Test::DBIC::SQLite;
                 post_connect_hook => \&populate_db,
             );
             my $schema = $t->connect_dbic_ok();
+            $schema->storage->disconnect();
         },
         {
             ok => 1,
