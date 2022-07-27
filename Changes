@@ -1,10 +1,14 @@
-Changes on 2022-07-26 for repository at:
+Changes on 2022-07-27 for repository at:
   Fetch URL: git@github.com:abeltje/Test-DBIC-SQLite
   Push  URL: git@github.com:abeltje/Test-DBIC-SQLite
 
 Enjoy!
 
-1.00_02 2022-07-26T11:02:36+02:00 (3dcc51a => Abe Timmerman)
+1.01 2022-07-27T09:38:03+02:00 (f9c1c23 => Abe Timmerman)
+ - (Abe Timmerman, Wed, 27 Jul 2022 09:38:03 +0200) Autocommit for
+   distribution Test::DBIC::SQLite 1.01 (minor)
+
+1.00_02 2022-07-26T11:02:36+02:00 (ef8bcd1 => Abe Timmerman)
  - (Abe Timmerman, Tue, 26 Jul 2022 11:02:36 +0200) Autocommit for
    distribution Test::DBIC::SQLite 1.00_02 (test)
 
